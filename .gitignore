@@ -1,0 +1,33 @@
+# Rust 编译输出目录
+/target/
+
+# Rust 依赖目录
+**/*.rs.bk
+
+# IDE 相关文件
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 操作系统相关文件
+.DS_Store
+Thumbs.db
+
+# 环境变量文件
+.env
+.env.local
+
+# 日志文件
+*.log
+
+# 其他临时文件
+*.tmp
+*.temp 
+
+/frontend/node_modules
+/frontend/dist
+/frontend/build
+/frontend/public/captcha
+/frontend/public/captcha_code
+/frontend/public/captcha_code_img

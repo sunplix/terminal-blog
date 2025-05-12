@@ -1,0 +1,293 @@
+:root {
+  /* 黑色主题 */
+  --dark-bg: #0a0a0a;
+  --dark-terminal-bg: rgba(20, 20, 20, 0.85);
+  --dark-text: #e0e0e0;
+  --dark-accent: #7aa2f7;
+  --dark-error: #f7768e;
+  --dark-success: #9ece6a;
+  --dark-border: rgba(255, 255, 255, 0.1);
+  --dark-input-bg: rgba(30, 30, 30, 0.85);
+  --dark-scrollbar: rgba(255, 255, 255, 0.1);
+  --dark-scrollbar-hover: rgba(255, 255, 255, 0.2);
+
+  /* 白色主题 */
+  --light-bg: #f5f5f5;
+  --light-terminal-bg: rgba(255, 255, 255, 0.85);
+  --light-text: #2c2c2c;
+  --light-accent: #2563eb;
+  --light-error: #dc2626;
+  --light-success: #16a34a;
+  --light-border: rgba(0, 0, 0, 0.1);
+  --light-input-bg: rgba(255, 255, 255, 0.85);
+  --light-scrollbar: rgba(0, 0, 0, 0.1);
+  --light-scrollbar-hover: rgba(0, 0, 0, 0.2);
+
+  /* 默认使用黑色主题 */
+  --bg-color: var(--dark-bg);
+  --terminal-bg: var(--dark-terminal-bg);
+  --text-color: var(--dark-text);
+  --accent-color: var(--dark-accent);
+  --error-color: var(--dark-error);
+  --success-color: var(--dark-success);
+  --border-color: var(--dark-border);
+  --input-bg: var(--dark-input-bg);
+  --scrollbar-color: var(--dark-scrollbar);
+  --scrollbar-hover: var(--dark-scrollbar-hover);
+}
+
+[data-theme="light"] {
+  --bg-color: var(--light-bg);
+  --terminal-bg: var(--light-terminal-bg);
+  --text-color: var(--light-text);
+  --accent-color: var(--light-accent);
+  --error-color: var(--light-error);
+  --success-color: var(--light-success);
+  --border-color: var(--light-border);
+  --input-bg: var(--light-input-bg);
+  --scrollbar-color: var(--light-scrollbar);
+  --scrollbar-hover: var(--light-scrollbar-hover);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(-45deg, #000000, #1a1a1a, #333333, #1a1a1a);
+  background-size: 200% 200%;
+  animation: gradient 8s ease infinite;
+  font-family: 'JetBrains Mono', monospace;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color);
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 50% 0%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+[data-theme="light"] body {
+  background: linear-gradient(-45deg, #ffffff, #e0e0e0, #c0c0c0, #e0e0e0);
+  background-size: 200% 200%;
+  animation: gradient 8s ease infinite;
+}
+
+.container {
+  width: 80%;
+  max-width: 1000px;
+  padding: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.terminal {
+  background-color: rgba(30, 30, 30, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: none;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.terminal-content {
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  background-color: var(--terminal-bg);
+  border-radius: 12px;
+  position: relative;
+}
+
+.input-area {
+  position: relative;
+  padding: 10px 15px;
+  border-radius: 12px;
+  background-color: var(--input-bg);
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 50px;
+}
+
+.input-area .prompt {
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 1.1em;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.input-area input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: 1em;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  height: 1.5em;
+}
+
+.input-area .theme-toggle {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.input-area .theme-toggle:hover {
+  background-color: var(--hover-bg);
+}
+
+.input-area::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+.input-area.success::before {
+  animation: shine 1.5s ease-in-out;
+}
+
+.input-area.error::before {
+  animation: shine-error 1.5s ease-in-out;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(144, 238, 144, 0.4),
+      transparent
+    );
+  }
+  20% { left: 100%; }
+  100% { left: 100%; }
+}
+
+@keyframes shine-error {
+  0% {
+    left: -100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 182, 193, 0.4),
+      transparent
+    );
+  }
+  20% { left: 100%; }
+  100% { left: 100%; }
+}
+
+.prompt {
+  color: var(--accent-color);
+  font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.input-wrapper {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+#terminal-input {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  outline: none;
+  position: relative;
+  z-index: 2;
+  caret-color: var(--text-color);
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  margin-left: 10px;
+  outline: none;
+}
+
+.theme-toggle:focus {
+  outline: none;
+}
+
+.theme-toggle:hover {
+  background-color: var(--accent-color);
+  color: var(--terminal-bg);
+}
+
+.theme-toggle i {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover i {
+  transform: rotate(180deg);
+} 

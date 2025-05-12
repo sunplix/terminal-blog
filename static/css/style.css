@@ -1,0 +1,708 @@
+:root {
+    /* 黑色主题 */
+    --dark-bg: #0a0a0a;
+    --dark-terminal-bg: rgba(20, 20, 20, 0.85);
+    --dark-text: #e0e0e0;
+    --dark-accent: #7aa2f7;
+    --dark-error: #f7768e;
+    --dark-success: #9ece6a;
+    --dark-border: rgba(255, 255, 255, 0.1);
+    --dark-input-bg: rgba(30, 30, 30, 0.85);
+    --dark-scrollbar: rgba(255, 255, 255, 0.1);
+    --dark-scrollbar-hover: rgba(255, 255, 255, 0.2);
+
+    /* 白色主题 */
+    --light-bg: #f5f5f5;
+    --light-terminal-bg: rgba(255, 255, 255, 0.85);
+    --light-text: #2c2c2c;
+    --light-accent: #2563eb;
+    --light-error: #dc2626;
+    --light-success: #16a34a;
+    --light-border: rgba(0, 0, 0, 0.1);
+    --light-input-bg: rgba(240, 240, 240, 0.85);
+    --light-scrollbar: rgba(0, 0, 0, 0.1);
+    --light-scrollbar-hover: rgba(0, 0, 0, 0.2);
+
+    /* 默认使用黑色主题 */
+    --bg-color: var(--dark-bg);
+    --terminal-bg: var(--dark-terminal-bg);
+    --text-color: var(--dark-text);
+    --accent-color: var(--dark-accent);
+    --error-color: var(--dark-error);
+    --success-color: var(--dark-success);
+    --border-color: var(--dark-border);
+    --input-bg: var(--dark-input-bg);
+    --scrollbar-color: var(--dark-scrollbar);
+    --scrollbar-hover: var(--dark-scrollbar-hover);
+
+    /* 全局样式 */
+    --primary-color: #007bff;
+    --background-color: #f8f9fa;
+    --terminal-text: #f8f9fa;
+    --terminal-prompt: #0f0;
+    --terminal-input-bg: #2d2d2d;
+    --terminal-border: #3d3d3d;
+    --terminal-shadow: rgba(0, 0, 0, 0.2);
+    --terminal-hint: rgba(255, 255, 255, 0.5);
+    --terminal-captcha: #ffd700;
+    --terminal-error: #ff6b6b;
+    --terminal-success: #51cf66;
+    --terminal-warning: #ffd43b;
+    --terminal-info: #339af0;
+    --terminal-debug: #868e96;
+    --terminal-trace: #adb5bd;
+    --terminal-verbose: #ced4da;
+    --terminal-silly: #dee2e6;
+    --terminal-http: #4dabf7;
+    --terminal-https: #37b24d;
+    --terminal-ws: #f59f00;
+    --terminal-wss: #f03e3e;
+    --terminal-tcp: #845ef7;
+    --terminal-udp: #e64980;
+    --terminal-icmp: #fd7e14;
+    --terminal-dns: #20c997;
+    --terminal-ssh: #fa5252;
+    --terminal-ftp: #be4bdb;
+    --terminal-smtp: #12b886;
+    --terminal-pop3: #228be6;
+    --terminal-imap: #40c057;
+    --terminal-ldap: #fd7e14;
+    --terminal-kerberos: #e64980;
+    --terminal-ntlm: #be4bdb;
+    --terminal-oauth: #228be6;
+    --terminal-jwt: #40c057;
+    --terminal-saml: #fd7e14;
+    --terminal-openid: #e64980;
+    --terminal-oauth2: #be4bdb;
+    --terminal-oidc: #228be6;
+    --terminal-sso: #40c057;
+    --terminal-mfa: #fd7e14;
+    --terminal-2fa: #e64980;
+    --terminal-u2f: #be4bdb;
+    --terminal-webauthn: #228be6;
+    --terminal-fido: #40c057;
+    --terminal-fido2: #fd7e14;
+    --terminal-ctap: #e64980;
+    --terminal-ctap2: #be4bdb;
+    --terminal-ctap3: #228be6;
+    --terminal-ctap4: #40c057;
+    --terminal-ctap5: #fd7e14;
+    --terminal-ctap6: #e64980;
+    --terminal-ctap7: #be4bdb;
+    --terminal-ctap8: #228be6;
+    --terminal-ctap9: #40c057;
+    --terminal-ctap10: #fd7e14;
+    --terminal-ctap11: #e64980;
+    --terminal-ctap12: #be4bdb;
+    --terminal-ctap13: #228be6;
+    --terminal-ctap14: #40c057;
+    --terminal-ctap15: #fd7e14;
+    --terminal-ctap16: #e64980;
+    --terminal-ctap17: #be4bdb;
+    --terminal-ctap18: #228be6;
+    --terminal-ctap19: #40c057;
+    --terminal-ctap20: #fd7e14;
+    --terminal-ctap21: #e64980;
+    --terminal-ctap22: #be4bdb;
+    --terminal-ctap23: #228be6;
+    --terminal-ctap24: #40c057;
+    --terminal-ctap25: #fd7e14;
+    --terminal-ctap26: #e64980;
+    --terminal-ctap27: #be4bdb;
+    --terminal-ctap28: #228be6;
+    --terminal-ctap29: #40c057;
+    --terminal-ctap30: #fd7e14;
+    --terminal-ctap31: #e64980;
+    --terminal-ctap32: #be4bdb;
+    --terminal-ctap33: #228be6;
+    --terminal-ctap34: #40c057;
+    --terminal-ctap35: #fd7e14;
+    --terminal-ctap36: #e64980;
+    --terminal-ctap37: #be4bdb;
+    --terminal-ctap38: #228be6;
+    --terminal-ctap39: #40c057;
+    --terminal-ctap40: #fd7e14;
+    --terminal-ctap41: #e64980;
+    --terminal-ctap42: #be4bdb;
+    --terminal-ctap43: #228be6;
+    --terminal-ctap44: #40c057;
+    --terminal-ctap45: #fd7e14;
+    --terminal-ctap46: #e64980;
+    --terminal-ctap47: #be4bdb;
+    --terminal-ctap48: #228be6;
+    --terminal-ctap49: #40c057;
+    --terminal-ctap50: #fd7e14;
+    --terminal-ctap51: #e64980;
+    --terminal-ctap52: #be4bdb;
+    --terminal-ctap53: #228be6;
+    --terminal-ctap54: #40c057;
+    --terminal-ctap55: #fd7e14;
+    --terminal-ctap56: #e64980;
+    --terminal-ctap57: #be4bdb;
+    --terminal-ctap58: #228be6;
+    --terminal-ctap59: #40c057;
+    --terminal-ctap60: #fd7e14;
+    --terminal-ctap61: #e64980;
+    --terminal-ctap62: #be4bdb;
+    --terminal-ctap63: #228be6;
+    --terminal-ctap64: #40c057;
+    --terminal-ctap65: #fd7e14;
+    --terminal-ctap66: #e64980;
+    --terminal-ctap67: #be4bdb;
+    --terminal-ctap68: #228be6;
+    --terminal-ctap69: #40c057;
+    --terminal-ctap70: #fd7e14;
+    --terminal-ctap71: #e64980;
+    --terminal-ctap72: #be4bdb;
+    --terminal-ctap73: #228be6;
+    --terminal-ctap74: #40c057;
+    --terminal-ctap75: #fd7e14;
+    --terminal-ctap76: #e64980;
+    --terminal-ctap77: #be4bdb;
+    --terminal-ctap78: #228be6;
+    --terminal-ctap79: #40c057;
+    --terminal-ctap80: #fd7e14;
+    --terminal-ctap81: #e64980;
+    --terminal-ctap82: #be4bdb;
+    --terminal-ctap83: #228be6;
+    --terminal-ctap84: #40c057;
+    --terminal-ctap85: #fd7e14;
+    --terminal-ctap86: #e64980;
+    --terminal-ctap87: #be4bdb;
+    --terminal-ctap88: #228be6;
+    --terminal-ctap89: #40c057;
+    --terminal-ctap90: #fd7e14;
+    --terminal-ctap91: #e64980;
+    --terminal-ctap92: #be4bdb;
+    --terminal-ctap93: #228be6;
+    --terminal-ctap94: #40c057;
+    --terminal-ctap95: #fd7e14;
+    --terminal-ctap96: #e64980;
+    --terminal-ctap97: #be4bdb;
+    --terminal-ctap98: #228be6;
+    --terminal-ctap99: #40c057;
+    --terminal-ctap100: #fd7e14;
+}
+
+[data-theme="light"] {
+    --bg-color: var(--light-bg);
+    --terminal-bg: var(--light-terminal-bg);
+    --text-color: var(--light-text);
+    --accent-color: var(--light-accent);
+    --error-color: var(--light-error);
+    --success-color: var(--light-success);
+    --border-color: var(--light-border);
+    --input-bg: var(--light-input-bg);
+    --scrollbar-color: var(--light-scrollbar);
+    --scrollbar-hover: var(--light-scrollbar-hover);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(-45deg, #000000, #1a1a1a, #333333, #1a1a1a);
+    background-size: 200% 200%;
+    animation: gradient 8s ease infinite;
+    font-family: 'JetBrains Mono', monospace;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    25% {
+        background-position: 50% 0%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    75% {
+        background-position: 50% 100%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+[data-theme="light"] body {
+    background: linear-gradient(-45deg, #ffffff, #e0e0e0, #c0c0c0, #e0e0e0);
+    background-size: 200% 200%;
+    animation: gradient 8s ease infinite;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    padding: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.terminal {
+    background-color: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: none;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.terminal-content {
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: transparent;
+    position: relative;
+}
+
+.input-area {
+    position: relative;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-color: var(--input-bg);
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 50px;
+}
+
+.input-area .prompt {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.1em;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.input-area input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 1em;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    height: 1.5em;
+}
+
+.input-area .theme-toggle {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.input-area .theme-toggle:hover {
+    background-color: var(--hover-bg);
+}
+
+.input-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.input-area.success::before {
+    animation: shine 1.5s ease-in-out;
+}
+
+.input-area.error::before {
+    animation: shine-error 1.5s ease-in-out;
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(144, 238, 144, 0.4),
+            transparent
+        );
+    }
+    20% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes shine-error {
+    0% {
+        left: -100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 182, 193, 0.4),
+            transparent
+        );
+    }
+    20% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+/* 移除旧的动画类 */
+.terminal-input-success,
+.terminal-input-error {
+    animation: none;
+}
+
+.prompt {
+    color: var(--accent-color);
+    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.input-wrapper {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+#terminal-input {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    outline: none;
+    position: relative;
+    z-index: 2;
+    caret-color: var(--text-color);
+}
+
+/* 主题切换按钮 */
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    margin-left: 10px;
+}
+
+.theme-toggle:hover {
+    background-color: var(--accent-color);
+    color: var(--terminal-bg);
+}
+
+.theme-toggle i {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover i {
+    transform: rotate(180deg);
+}
+
+.output-area {
+    padding: 20px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 12px;
+    margin-top: 10px;
+    max-height: 70vh;
+    background-color: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: none;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+.output-area::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+}
+
+.output-area.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.command-output {
+    margin: 15px 0;
+    padding: 5px 0;
+    white-space: pre-wrap;
+    font-family: 'JetBrains Mono', monospace;
+    animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 24px;
+}
+
+.command-output div {
+    padding: 2px 0;
+    min-height: 20px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.error {
+    color: var(--error-color);
+}
+
+.success {
+    color: var(--success-color);
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-hover);
+}
+
+.hint-container {
+    padding: 8px 20px;
+    background-color: rgba(30, 30, 30, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    margin: 8px 0;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.captcha-label {
+    color: #ff6b6b;
+    font-weight: bold;
+    font-family: 'JetBrains Mono', "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    letter-spacing: 2px;
+    padding: 4px 0;
+    margin-bottom: 4px;
+    transition: opacity 0.3s, transform 0.3s;
+    user-select: all;
+    cursor: pointer;
+}
+
+.command-hint {
+    color: var(--text-color);
+    font-family: 'JetBrains Mono', "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    user-select: none;
+    padding: 4px 0;
+    position: relative;
+    background: none;
+    background-image: linear-gradient(to right, var(--text-color), var(--accent-color), var(--text-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine-dark 3.6s ease-out infinite;
+}
+
+.command-hint::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, var(--text-color), var(--accent-color), var(--text-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine-dark 3.6s ease-out infinite;
+    pointer-events: none;
+}
+
+/* 添加中文字体样式 */
+.command-output,
+.command-hint,
+.captcha-label {
+    font-family: 'JetBrains Mono', "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* 确保输入框使用等宽字体 */
+#terminal-input {
+    width: 100%;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    outline: none;
+    position: relative;
+    z-index: 2;
+    caret-color: var(--text-color);
+}
+
+/* 确保提示文本使用等宽字体 */
+.prompt {
+    color: var(--accent-color);
+    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+[data-theme="light"] .terminal {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .input-area {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+}
+
+[data-theme="light"] .output-area {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+}
+
+[data-theme="light"] .hint-container {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+}
+
+.path-display {
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.3s ease;
+    padding: 0 20px;
+}
+
+[data-theme="light"] .path-display {
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+/* 当有提示框时，调整输出区域的位置 */
+.terminal-content:has(.hint-container) .output-area {
+    margin-bottom: 60px;
+    /* 为提示框预留空间 */
+}
+
+/* 黑色主题扫光动画 */
+@keyframes shine-dark {
+    0% {
+        background-position: 100% 0;
+    }
+    50% {
+        background-position: 0% 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+/* 白色主题扫光动画 */
+@keyframes shine-light {
+    0% {
+        background-position: 100% 0;
+    }
+    50% {
+        background-position: 0% 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
+}
+
+[data-theme="light"] .command-hint::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, var(--text-color), var(--accent-color), var(--text-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine-light 3.6s ease-out infinite;
+    pointer-events: none;
+}

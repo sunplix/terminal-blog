@@ -1,0 +1,33 @@
+[package]
+name = "blog"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+actix-web = "4.0"
+actix-files = "0.6"
+actix-cors = "0.6"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1.0", features = ["full"] }
+sqlx = { version = "0.6", features = ["runtime-tokio-rustls", "postgres", "chrono", "uuid"] }
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.0", features = ["v4", "serde"] }
+env_logger = "0.9"
+log = "0.4"
+dotenv = "0.15"
+bcrypt = "0.10"
+jsonwebtoken = "8.1"
+regex = "1.5"
+mime_guess = "2.0"
+rand = "0.8"
+futures = "0.3.31"
+async-trait = "0.1.88"
+validator = { version = "0.20.0", features = ["validator_derive"] }
+sha2 = "0.10.9"
+futures-core = "0.3.31"
+thiserror = "2.0.12"
+
+[dev-dependencies]
+mockall = "0.12"
+tokio-test = "0.4"
