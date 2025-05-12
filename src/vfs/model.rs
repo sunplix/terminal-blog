@@ -1,6 +1,7 @@
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
-use std::fmt;
+use sqlx;
+use std::io;
 use thiserror::Error;
 
 pub type NodeId = i64;
@@ -61,6 +62,30 @@ pub enum VfsError {
 
     #[error("无效操作: {0}")]
     InvalidOperation(String),
+
+    #[error("I/O错误: {0}")]
+    IoError(#[from] io::Error),
+
+    #[error("数据库错误: {0}")]
+    DbError(#[from] sqlx::Error),
+}
+
+// 实现从VfsError到io::Error的转换
+impl From<VfsError> for io::Error {
+    fn from(error: VfsError) -> Self {
+        match error {
+            VfsError::PathError(msg) => io::Error::new(io::ErrorKind::InvalidInput, msg),
+            VfsError::PermissionError(msg) => io::Error::new(io::ErrorKind::PermissionDenied, msg),
+            VfsError::StorageError(msg) => io::Error::new(io::ErrorKind::Other, msg),
+            VfsError::NodeNotFound(msg) => io::Error::new(io::ErrorKind::NotFound, msg),
+            VfsError::NodeExists(msg) => io::Error::new(io::ErrorKind::AlreadyExists, msg),
+            VfsError::InvalidOperation(msg) => io::Error::new(io::ErrorKind::InvalidInput, msg),
+            VfsError::IoError(err) => err,
+            VfsError::DbError(err) => {
+                io::Error::new(io::ErrorKind::Other, format!("数据库错误: {}", err))
+            }
+        }
+    }
 }
 
 // 权限常量

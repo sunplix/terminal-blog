@@ -4,6 +4,7 @@ use actix_web::{web, HttpResponse};
 use async_trait::async_trait;
 use chrono::{NaiveDate, Utc};
 use log::{debug, error, info, warn};
+use regex::Regex;
 use serde_json::json;
 
 pub struct ProfileCommand;
@@ -131,7 +132,10 @@ impl CommandHandler for ProfileCommand {
                         }
                         // 简单的邮箱格式验证
                         let email_str = args[i + 1];
-                        if !email_str.contains('@') || !email_str.contains('.') {
+                        let email_regex =
+                            Regex::new(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                                .unwrap();
+                        if !email_regex.is_match(email_str) {
                             return HttpResponse::BadRequest().json(super::CommandResponse {
                                 success: false,
                                 message: "邮箱格式不正确".to_string(),

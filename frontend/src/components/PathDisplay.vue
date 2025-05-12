@@ -55,12 +55,7 @@ watch(() => props.currentPath, (newPath) => {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   background: none;
-  background-image: linear-gradient(
-    to right,
-    #EEC9A3 0%,
-    #EF629F 50%,
-    #EEC9A3 100%
-  );
+  background-image: var(--path-bg-img);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

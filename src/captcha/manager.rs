@@ -70,7 +70,7 @@ impl CaptchaManager {
             );
 
             // 验证码正确
-            if captcha.code == code {
+            if captcha.code.to_lowercase() == code.to_lowercase() {
                 info!("验证码验证成功 - 会话ID: {}", session_id);
                 return true;
             } else {

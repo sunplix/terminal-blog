@@ -67,12 +67,6 @@ impl CommandRegistry {
     pub fn get_handler(&self, command_name: &str) -> Option<&dyn CommandHandler> {
         self.commands.get(command_name).map(|h| h.as_ref())
     }
-
-    pub fn get_command_description(&self, command_name: &str) -> Option<String> {
-        self.commands
-            .get(command_name)
-            .map(|h| h.description().to_string())
-    }
 }
 
 // 命令响应结构体
@@ -114,23 +108,6 @@ pub async fn handle_command(
             message: "命令不能为空".to_string(),
             data: None,
         });
-    }
-
-    // 如果命令以 "description" 开头，返回命令描述
-    if args[0] == "description" && args.len() > 1 {
-        if let Some(description) = data.command_registry.get_command_description(args[1]) {
-            return HttpResponse::Ok().json(CommandResponse {
-                success: true,
-                message: description,
-                data: None,
-            });
-        } else {
-            return HttpResponse::BadRequest().json(CommandResponse {
-                success: false,
-                message: format!("未知命令: {}", args[1]),
-                data: None,
-            });
-        }
     }
 
     // 获取命令处理器

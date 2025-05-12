@@ -71,12 +71,7 @@ watch(() => props.visible, (newValue) => {
   padding: 4px 0;
   position: relative;
   background: none;
-  background-image: linear-gradient(
-    to right,
-    #b92b27 0%,
-    #1565C0 50%,
-    #b92b27 100%
-  );
+  background-image: var(--hint-bg-img);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
