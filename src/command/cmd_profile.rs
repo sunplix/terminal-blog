@@ -28,12 +28,13 @@ impl CommandHandler for ProfileCommand {
         &self,
         args: &[&str],
         data: &web::Data<crate::AppState>,
-        token: &str,
+        session_id: &str,
+        cwd: &str,
     ) -> HttpResponse {
         info!("开始处理 profile 命令");
 
         // 验证 token
-        let claims = match validate_token(token) {
+        let claims = match validate_token(session_id) {
             Ok(claims) => claims,
             Err(_) => {
                 warn!("未登录");
@@ -46,7 +47,7 @@ impl CommandHandler for ProfileCommand {
         };
 
         // 检查 token 是否在黑名单中
-        if data.auth_manager.is_token_blacklisted(token) {
+        if data.auth_manager.is_token_blacklisted(session_id) {
             debug!("Token 已失效");
             return HttpResponse::Unauthorized().json(super::CommandResponse {
                 success: false,

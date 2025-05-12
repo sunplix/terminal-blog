@@ -21,6 +21,7 @@ impl PermissionManager {
         let required_perm = match op {
             VfsOp::ReadDir | VfsOp::ReadFile => PERM_READ,
             VfsOp::WriteFile | VfsOp::CreateDir | VfsOp::Delete | VfsOp::Rename => PERM_WRITE,
+            VfsOp::Execute => PERM_EXEC,
         };
 
         // 检查用户是否是节点所有者
@@ -90,6 +91,38 @@ impl PermissionManager {
         }
 
         Ok(true)
+    }
+
+    ///TODO: 需要使用数据库中的权限来检查。
+    pub fn can_enter(user: &User, path: &str) -> Result<(), VfsError> {
+        debug!("检查目录进入权限 - 用户: {}, 路径: {}", user.username, path);
+
+        // 管理员有所有权限
+        if user.roles.contains(&Role::Admin) {
+            debug!("用户是管理员，允许所有操作");
+            return Ok(());
+        }
+
+        // Guest 用户只能进入 /home/guest/
+        if user.roles.contains(&Role::Guest) {
+            if !path.starts_with("/home/guest/") {
+                return Err(VfsError::PermissionError(
+                    "访客用户只能进入 /home/guest/ 目录".to_string(),
+                ));
+            }
+        }
+
+        // Author 用户只能进入自己的目录
+        if user.roles.contains(&Role::Author) {
+            let user_home = format!("/home/{}", user.username);
+            if !path.starts_with(&user_home) {
+                return Err(VfsError::PermissionError(
+                    "作者用户只能进入自己的目录".to_string(),
+                ));
+            }
+        }
+
+        Ok(())
     }
 
     pub fn can_write(user: &User, path: &str) -> bool {

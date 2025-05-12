@@ -30,6 +30,7 @@ impl CommandHandler for LoginCommand {
         args: &[&str],
         data: &web::Data<crate::AppState>,
         session_id: &str,
+        cwd: &str,
     ) -> HttpResponse {
         info!("开始处理登录命令");
 

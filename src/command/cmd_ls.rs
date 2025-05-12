@@ -28,7 +28,8 @@ impl CommandHandler for LsCommand {
         &self,
         args: &[&str],
         data: &web::Data<crate::AppState>,
-        token: &str,
+        session_id: &str,
+        _cwd: &str,
     ) -> HttpResponse {
         info!("开始处理 ls 命令");
 
@@ -37,7 +38,7 @@ impl CommandHandler for LsCommand {
         debug!("处理 ls 命令，路径: {}", path);
 
         // 验证 token
-        let claims = match validate_token(token) {
+        let claims = match validate_token(session_id) {
             Ok(claims) => claims,
             Err(_) => {
                 error!("无效的 token");
@@ -50,7 +51,7 @@ impl CommandHandler for LsCommand {
         };
 
         // 检查 token 是否在黑名单中
-        if data.auth_manager.is_token_blacklisted(token) {
+        if data.auth_manager.is_token_blacklisted(session_id) {
             debug!("Token 已失效");
             return HttpResponse::Unauthorized().json(super::CommandResponse {
                 success: false,
@@ -91,8 +92,8 @@ impl CommandHandler for LsCommand {
             }
         };
 
-        // 设置默认目录为用户目录
-        let cwd = format!("/home/{}/", user.username);
+        // 设置当前目录为前端传递过来的当前工作目录
+        let cwd = format!("{}", _cwd);
 
         // 获取目录内容
         match data.vfs_manager.list_dir(&user, path, &cwd).await {

@@ -8,4 +8,4 @@ pub use manager::VfsManager;
 pub use model::{Role, User, VfsError, VfsNode, VfsOp};
 pub use path_normalizer::PathNormalizer;
 pub use permission::PermissionManager;
-pub use storage::{postgres_backend::PostgresBackend, StorageBackend};
+pub use storage::{backend::PostgresBackend, StorageBackend};

@@ -27,6 +27,7 @@ impl CommandHandler for LogoutCommand {
         _args: &[&str],
         data: &web::Data<crate::AppState>,
         session_id: &str,
+        cwd: &str,
     ) -> HttpResponse {
         info!("开始处理登出命令");
 

@@ -25,16 +25,17 @@ impl CommandHandler for IdCommand {
 
     async fn handle(
         &self,
-        _args: &[&str],
+        args: &[&str],
         data: &web::Data<crate::AppState>,
-        token: &str,
+        session_id: &str,
+        cwd: &str,
     ) -> HttpResponse {
         info!("开始处理ID命令");
 
         // 验证 token
-        if let Ok(claims) = validate_token(token) {
+        if let Ok(claims) = validate_token(session_id) {
             // 检查 token 是否在黑名单中
-            if data.auth_manager.is_token_blacklisted(token) {
+            if data.auth_manager.is_token_blacklisted(session_id) {
                 debug!("Token 已失效");
                 return HttpResponse::Unauthorized().json(super::CommandResponse {
                     success: false,

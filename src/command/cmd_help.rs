@@ -26,6 +26,7 @@ impl CommandHandler for HelpCommand {
         args: &[&str],
         data: &web::Data<crate::AppState>,
         session_id: &str,
+        cwd: &str,
     ) -> HttpResponse {
         let mut commands_info = Vec::new();
 

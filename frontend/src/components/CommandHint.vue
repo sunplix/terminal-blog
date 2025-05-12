@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
+import { commandDescriptions, initCommandDescriptions } from '../commands'
 
 const props = defineProps<{
   hint: string
@@ -9,7 +10,13 @@ const props = defineProps<{
 
 const hintEl = ref<HTMLElement | null>(null)
 
-onMounted(() => {
+// 初始化时获取所有命令描述
+onMounted(async () => {
+  // 如果缓存为空，则初始化
+  if (commandDescriptions.size === 0) {
+    await initCommandDescriptions()
+  }
+  
   if (hintEl.value) {
     hintEl.value.style.opacity = '0'
     hintEl.value.style.transform = 'translateY(-10px)'
@@ -64,7 +71,13 @@ watch(() => props.visible, (newValue) => {
   padding: 4px 0;
   position: relative;
   background: none;
-  background-image: linear-gradient(to right, var(--text-color), var(--accent-color), var(--text-color));
+  background-image: linear-gradient(
+    to right,
+    #b92b27 0%,
+    #1565C0 50%,
+    #b92b27 100%
+  );
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   white-space: pre-wrap;
@@ -73,12 +86,19 @@ watch(() => props.visible, (newValue) => {
   transform: translateY(-10px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: none;
+  animation: textShine 3s linear infinite;
 }
 
 .command-hint.visible {
   display: block;
   opacity: 1;
   transform: translateY(0);
+}
+
+@keyframes textShine {
+  to {
+    background-position: 200% center;
+  }
 }
 
 .loading-dots {

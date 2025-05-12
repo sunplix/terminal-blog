@@ -1,11 +1,9 @@
 use actix_cors::Cors;
-use actix_files::NamedFile;
 use actix_web::{http::header, middleware, web, App, HttpResponse, HttpServer, Responder, Result};
 use bcrypt::{hash, verify, DEFAULT_COST};
 use chrono::{DateTime, Utc};
 use dotenv::dotenv;
 use jsonwebtoken::{decode, encode, DecodingKey, EncodingKey, Header, Validation};
-use mime_guess;
 use regex::Regex;
 use serde::{Deserialize, Serialize};
 use serde_json;
@@ -31,7 +29,7 @@ use command::{handle_command, CommandRegistry};
 use log::{error, info};
 use vfs::{
     model::{Role, User as VfsUser, VfsError},
-    storage::postgres_backend::PostgresBackend,
+    storage::backend::PostgresBackend,
     VfsManager,
 };
 
@@ -181,50 +179,6 @@ async fn cleanup_expired_tokens(data: web::Data<AppState>) {
         interval.tick().await;
         data.auth_manager.cleanup_expired_tokens();
     }
-}
-
-// 处理根路径
-async fn index() -> impl Responder {
-    let start = SystemTime::now();
-    let since_the_epoch = start.duration_since(UNIX_EPOCH).unwrap();
-    let timestamp = since_the_epoch.as_secs();
-
-    let html =
-        include_str!("../templates/index.html").replace("{{ timestamp }}", &timestamp.to_string());
-
-    HttpResponse::Ok()
-        .content_type("text/html; charset=utf-8")
-        .insert_header((header::CACHE_CONTROL, "no-cache, no-store, must-revalidate"))
-        .insert_header((header::PRAGMA, "no-cache"))
-        .insert_header((header::EXPIRES, "0"))
-        .insert_header((header::ETAG, format!("\"{}\"", timestamp)))
-        .body(html)
-}
-
-/// 自定义静态文件路由，带 no-cache 头
-async fn serve_static(path: web::Path<String>) -> Result<impl Responder> {
-    let file_path = format!("static/{}", path);
-    let file = NamedFile::open(&file_path)?
-        .set_content_type(mime_guess::from_path(&file_path).first_or_octet_stream());
-
-    // 获取文件的最后修改时间
-    let metadata = std::fs::metadata(&file_path)?;
-    let last_modified = metadata.modified()?;
-    let duration = last_modified
-        .duration_since(UNIX_EPOCH)
-        .map_err(|e| actix_web::error::ErrorInternalServerError(e))?;
-    let etag = format!("\"{:x}\"", duration.as_secs());
-
-    // 设置缓存控制头
-    let response = file
-        .customize()
-        .insert_header((header::CACHE_CONTROL, "no-cache, no-store, must-revalidate"))
-        .insert_header((header::PRAGMA, "no-cache"))
-        .insert_header((header::EXPIRES, "0"))
-        .insert_header((header::ETAG, etag))
-        .insert_header((header::LAST_MODIFIED, duration.as_secs().to_string()));
-
-    Ok(response)
 }
 
 // 验证 JWT token
@@ -583,10 +537,8 @@ async fn main() -> std::io::Result<()> {
                     .allow_any_header()
                     .max_age(3600),
             )
-            .route("/", web::get().to(index))
             .route("/api/command", web::post().to(handle_command))
             .route("/api/captcha", web::get().to(handle_get_captcha))
-            .route("/static/{path:.*}", web::get().to(serve_static))
             .service(
                 web::scope("/api/vfs")
                     .wrap(auth_middleware.clone())

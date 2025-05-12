@@ -4,6 +4,7 @@ use log::{debug, error, info, warn};
 use serde_json::Value;
 use std::collections::HashMap;
 
+mod cmd_cd;
 mod cmd_clear;
 mod cmd_help;
 mod cmd_id;
@@ -25,6 +26,7 @@ pub trait CommandHandler: Send + Sync {
         args: &[&str],
         data: &web::Data<crate::AppState>,
         session_id: &str,
+        cwd: &str,
     ) -> HttpResponse;
 }
 
@@ -50,6 +52,7 @@ impl CommandRegistry {
         registry.register(Box::new(cmd_ls::LsCommand::new()));
         registry.register(Box::new(cmd_pwd::PwdCommand::new()));
         registry.register(Box::new(cmd_mkdir::MkdirCommand::new()));
+        registry.register(Box::new(cmd_cd::CdCommand::new()));
 
         info!("命令注册器初始化完成");
         registry
@@ -88,6 +91,10 @@ pub async fn handle_command(
 ) -> impl Responder {
     let command = cmd.get("command").and_then(|v| v.as_str()).unwrap_or("");
     let session_id = cmd.get("session_id").and_then(|v| v.as_str()).unwrap_or("");
+    let cwd = cmd
+        .get("cwd")
+        .and_then(|v| v.as_str())
+        .unwrap_or("/home/guest/");
 
     // 从 Authorization header 中获取 token
     let token = req
@@ -135,7 +142,7 @@ pub async fn handle_command(
         } else {
             session_id
         };
-        let response = handler.handle(&args, &data, auth_token).await;
+        let response = handler.handle(&args, &data, auth_token, cwd).await;
         if !response.status().is_success() {
             error!("命令执行失败: {} - {}", args[0], response.status());
         }
@@ -154,7 +161,7 @@ pub async fn handle_command(
 fn requires_auth(command: &str) -> bool {
     matches!(
         command,
-        "profile" | "logout" | "id" | "ls" | "pwd" | "mkdir" | "rm" | "mv"
+        "profile" | "logout" | "id" | "ls" | "pwd" | "mkdir" | "rm" | "mv" | "cd"
     )
 }
 
@@ -169,4 +176,5 @@ pub fn register_commands(registry: &mut CommandRegistry) {
     registry.register(Box::new(cmd_ls::LsCommand::new()));
     registry.register(Box::new(cmd_pwd::PwdCommand::new()));
     registry.register(Box::new(cmd_mkdir::MkdirCommand::new()));
+    registry.register(Box::new(cmd_cd::CdCommand::new()));
 }

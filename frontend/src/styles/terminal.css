@@ -2,6 +2,7 @@
   /* 黑色主题 */
   --dark-bg: #0a0a0a;
   --dark-terminal-bg: rgba(20, 20, 20, 0.85);
+  --dark-output-bg: rgba(30, 30, 30, 0.7);
   --dark-text: #e0e0e0;
   --dark-accent: #7aa2f7;
   --dark-error: #f7768e;
@@ -14,6 +15,7 @@
   /* 白色主题 */
   --light-bg: #f5f5f5;
   --light-terminal-bg: rgba(255, 255, 255, 0.85);
+  --light-output-bg: rgba(255, 255, 255, 0.7);
   --light-text: #2c2c2c;
   --light-accent: #2563eb;
   --light-error: #dc2626;
@@ -83,6 +85,7 @@ body {
   background-size: 200% 200%;
   animation: gradient 8s ease infinite;
 }
+
 
 .container {
   width: 80%;
@@ -291,3 +294,58 @@ body {
 .theme-toggle:hover i {
   transform: rotate(180deg);
 } 
+
+.output-area {
+    padding: 20px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 12px;
+    margin-top: 10px;
+    max-height: 70vh;
+    background-color: var(--output-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: none;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+.output-area::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+}
+
+.output-area.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.command-output {
+    margin: 15px 0;
+    padding: 5px 0;
+    white-space: pre-wrap;
+    font-family: 'JetBrains Mono', "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 24px;
+    background: transparent;
+
+}
+
+.command-output div {
+    padding: 2px 0;
+    min-height: 20px;
+}
+
+.error {
+    color: var(--error-color);
+}
+
+.success {
+    color: var(--success-color);
+}

@@ -22,4 +22,4 @@ pub trait StorageBackend: Send + Sync {
     async fn update_node(&self, node: &VfsNode) -> Result<(), VfsError>;
 }
 
-pub mod postgres_backend;
+pub mod backend;

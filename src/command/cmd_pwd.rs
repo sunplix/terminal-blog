@@ -26,12 +26,13 @@ impl CommandHandler for PwdCommand {
         &self,
         _args: &[&str],
         data: &web::Data<crate::AppState>,
-        token: &str,
+        session_id: &str,
+        cwd: &str,
     ) -> HttpResponse {
         info!("开始处理 pwd 命令");
 
         // 获取当前用户名（如果已登录）
-        let path = match validate_token(token) {
+        let path = match validate_token(session_id) {
             Ok(claims) => {
                 // 从数据库获取用户名
                 match sqlx::query!("SELECT username FROM users WHERE id = $1", claims.sub)

@@ -39,6 +39,7 @@ pub enum VfsOp {
     CreateDir,
     Delete,
     Rename,
+    Execute,
 }
 
 #[derive(Debug, Error)]

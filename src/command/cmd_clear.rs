@@ -23,9 +23,10 @@ impl CommandHandler for ClearCommand {
 
     async fn handle(
         &self,
-        _args: &[&str],
-        _data: &web::Data<crate::AppState>,
-        _session_id: &str,
+        args: &[&str],
+        data: &web::Data<crate::AppState>,
+        session_id: &str,
+        cwd: &str,
     ) -> HttpResponse {
         info!("开始处理清除命令");
         debug!("清除屏幕");

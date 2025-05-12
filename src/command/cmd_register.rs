@@ -31,6 +31,7 @@ impl CommandHandler for RegisterCommand {
         args: &[&str],
         data: &web::Data<crate::AppState>,
         session_id: &str,
+        cwd: &str,
     ) -> HttpResponse {
         info!("开始处理注册命令");
 
@@ -218,7 +219,7 @@ impl CommandHandler for RegisterCommand {
                 // 创建用户目录
                 let user_dir = format!("/home/{}", username);
                 let system_admin = VfsUser {
-                    id: "system".to_string(),
+                    id: user_id.clone(),
                     username: "system".to_string(),
                     roles: vec![Role::Admin],
                 };

@@ -28,7 +28,8 @@ impl CommandHandler for MkdirCommand {
         &self,
         args: &[&str],
         data: &web::Data<crate::AppState>,
-        token: &str,
+        session_id: &str,
+        _cwd: &str,
     ) -> HttpResponse {
         info!("开始处理 mkdir 命令");
 
@@ -61,7 +62,7 @@ impl CommandHandler for MkdirCommand {
         debug!("创建目录: {}, 递归: {}", dir_name, recursive);
 
         // 验证 JWT
-        let claims = match validate_token(token) {
+        let claims = match validate_token(session_id) {
             Ok(c) => c,
             Err(_) => {
                 error!("无效的 token");
@@ -72,7 +73,7 @@ impl CommandHandler for MkdirCommand {
                 });
             }
         };
-        if data.auth_manager.is_token_blacklisted(token) {
+        if data.auth_manager.is_token_blacklisted(session_id) {
             debug!("Token 已失效");
             return HttpResponse::Unauthorized().json(super::CommandResponse {
                 success: false,
@@ -113,8 +114,8 @@ impl CommandHandler for MkdirCommand {
             }
         };
 
-        // 家目录，用于相对路径
-        let cwd = format!("/home/{}/", user.username);
+        // 当前目录
+        let cwd = format!("{}", _cwd);
 
         if recursive {
             // 拆分路径组件
